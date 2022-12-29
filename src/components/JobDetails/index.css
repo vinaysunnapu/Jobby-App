@@ -1,0 +1,158 @@
+.bg-job-item-details-container {
+  display: flex;
+  justify-content: center;
+}
+.job-item-details-container {
+  width: 90%;
+  background-color: #272727;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+.job-item-details-sub-container {
+  width: 90%;
+  background-color: #475569;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+.jobCompanyLogo-container {
+  display: flex;
+  align-items: center;
+}
+.job-company-logo {
+  width: 70px;
+  height: 80px;
+  margin-right: 10px;
+}
+.job-rating-container {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.job-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+.job-package-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+.job-bottom-line {
+  color: white;
+  width: 100%;
+}
+.visit-url-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.job-description-heading {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: roboto;
+}
+.visit-link {
+  color: #6366f1;
+  font-family: roboto;
+}
+.job-description-para {
+  font-family: roboto;
+  color: white;
+}
+.skills-heading {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: roboto;
+}
+.skills-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.skill-item-container {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  font-family: roboto;
+  color: white;
+  margin-bottom: 30px;
+}
+.skill-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+.life-at-company-heading {
+  color: white;
+  font-family: roboto;
+  font-size: 22px;
+  font-weight: bold;
+}
+.life-at-company-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+.life-at-company-image {
+  width: 500px;
+  height: 300px;
+}
+.life-at-company-description {
+  color: white;
+  font-family: roboto;
+  margin-right: 40px;
+  line-height: 30px;
+}
+.similar-jobs-container {
+  width: 90%;
+
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+.similar-job-heading {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: roboto;
+  align-items: flex-start;
+}
+.similar-jobs-list-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.job-details-failure-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: roboto;
+}
+.job-details-failure-view-image {
+  width: 500px;
+  height: 400px;
+}
+.job-details-retry-button {
+  color: white;
+  background-color: #4f46e5;
+  height: 40px;
+  padding: 10px;
+  border-radius: 8px;
+}
