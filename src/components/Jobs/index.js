@@ -70,6 +70,8 @@ class Jobs extends Component {
     activeSalaryRangeId: '',
     jobsData: [],
     jobsApiStatus: jobsApiStatusConstants.initial,
+    searchInput: '',
+    activeEmploymentTypeList: [],
   }
 
   componentDidMount() {
@@ -82,9 +84,14 @@ class Jobs extends Component {
   }
 
   getJobDetails = async () => {
+    const {
+      activeEmploymentTypeId,
+      activeSalaryRangeId,
+      searchInput,
+    } = this.state
     const jwtToken = Cookies.get('jwt_token')
 
-    const url = 'https://apis.ccbp.in/jobs'
+    const url = `https://apis.ccbp.in/jobs?employment_type=${activeEmploymentTypeId}&minimum_package=${activeSalaryRangeId}&search=${searchInput}`
     const options = {
       method: 'GET',
       headers: {
@@ -117,12 +124,24 @@ class Jobs extends Component {
 
   renderJobDetailsView = () => {
     const {jobsData} = this.state
-    return (
+    const shouldShowJobList = jobsData.length > 0
+
+    return shouldShowJobList ? (
       <ul className="jobs-list-container">
         {jobsData.map(eachJob => (
           <JobCard jobDetails={eachJob} key={eachJob.id} />
         ))}
       </ul>
+    ) : (
+      <div className="no-jobs-view-container">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+          alt="no jobs"
+          className="no-jobs-image"
+        />
+        <h1>No Jobs Found</h1>
+        <p>We could not find any jobs. Try other filters</p>
+      </div>
     )
   }
 
@@ -244,16 +263,37 @@ class Jobs extends Component {
     }
   }
 
+  onClickSearch = () => {
+    this.getJobDetails()
+  }
+
+  onEnterSearchInput = event => {
+    if (event.key === 'Enter') {
+      this.getJobDetails()
+    }
+  }
+
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
   changeSalaryRangeType = activeSalaryRangeId => {
-    this.setState({activeSalaryRangeId})
+    this.setState({activeSalaryRangeId}, this.getJobDetails)
   }
 
   changeEmploymentType = activeEmploymentTypeId => {
-    this.setState({activeEmploymentTypeId})
+    const {activeEmploymentTypeList} = this.state
+    activeEmploymentTypeList.push(activeEmploymentTypeId)
+    const input = activeEmploymentTypeList.join(',')
+    this.setState({activeEmploymentTypeId: input}, this.getJobDetails)
   }
 
   render() {
-    const {activeEmploymentTypeId, activeSalaryRangeId} = this.state
+    const {
+      activeEmploymentTypeId,
+      activeSalaryRangeId,
+      searchInput,
+    } = this.state
     return (
       <>
         <Header />
@@ -273,8 +313,17 @@ class Jobs extends Component {
             </div>
             <div className="job-details-container">
               <div className="search-container">
-                <input type="search" className="search-items" />
-                <BsSearch className="search-icon" />
+                <input
+                  type="search"
+                  className="search-items"
+                  value={searchInput}
+                  onChange={this.onChangeSearchInput}
+                  onKeyDown={this.onEnterSearchInput}
+                />
+                <BsSearch
+                  className="search-icon"
+                  onClick={this.onClickSearch}
+                />
               </div>
               <div className="job-detail-container">
                 {this.renderJobDetails()}
