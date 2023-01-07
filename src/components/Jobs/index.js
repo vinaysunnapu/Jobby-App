@@ -89,6 +89,7 @@ class Jobs extends Component {
       activeSalaryRangeId,
       searchInput,
     } = this.state
+
     const jwtToken = Cookies.get('jwt_token')
 
     const url = `https://apis.ccbp.in/jobs?employment_type=${activeEmploymentTypeId}&minimum_package=${activeSalaryRangeId}&search=${searchInput}`
@@ -281,11 +282,28 @@ class Jobs extends Component {
     this.setState({activeSalaryRangeId}, this.getJobDetails)
   }
 
-  changeEmploymentType = activeEmploymentTypeId => {
+  getEmploymentIds = () => {
     const {activeEmploymentTypeList} = this.state
-    activeEmploymentTypeList.push(activeEmploymentTypeId)
     const input = activeEmploymentTypeList.join(',')
     this.setState({activeEmploymentTypeId: input}, this.getJobDetails)
+  }
+
+  changeEmploymentType = (activeEmploymentTypeId, event) => {
+    const {activeEmploymentTypeList} = this.state
+
+    const {checked} = event.target
+    if (checked) {
+      activeEmploymentTypeList.push(activeEmploymentTypeId)
+      this.setState({activeEmploymentTypeList}, this.getEmploymentIds)
+    } else {
+      const activeList = activeEmploymentTypeList.filter(
+        each => activeEmploymentTypeId !== each,
+      )
+      this.setState(
+        {activeEmploymentTypeList: activeList},
+        this.getEmploymentIds,
+      )
+    }
   }
 
   render() {

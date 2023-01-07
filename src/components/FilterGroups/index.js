@@ -6,14 +6,14 @@ const FilterGroups = props => {
 
     return employmentTypesList.map(eachType => {
       const {changeEmploymentType} = props
-      const onClickEmploymentType = () =>
-        changeEmploymentType(eachType.employmentTypeId)
+      const onClickEmploymentType = event =>
+        changeEmploymentType(eachType.employmentTypeId, event)
 
       return (
         <li
           className="employment-type-list-item"
           key={eachType.employmentTypeId}
-          onClick={onClickEmploymentType}
+          onChange={onClickEmploymentType}
         >
           <input type="checkbox" id={`checkbox ${eachType.employmentTypeId}`} />
           <label
